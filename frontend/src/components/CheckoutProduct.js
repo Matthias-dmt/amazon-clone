@@ -3,28 +3,36 @@ import "../css/CheckoutProduct.scss";
 import { useStateValue } from "../store/StateProvider";
 import STORE_CONST from "../store/store-const";
 
-function CheckoutProduct({ id, image, title, price, rating, count }) {
+function CheckoutProduct({
+  id,
+  image,
+  title,
+  price,
+  rating,
+  count,
+  action = true,
+}) {
   const [, dispatch] = useStateValue();
 
   const addItem = () => {
     dispatch({
       type: STORE_CONST.ADD_ITEM_FROM_BASKET,
-      id
+      id,
     });
   };
 
   const removeItem = () => {
     dispatch({
       type: STORE_CONST.REMOVE_ITEM_FROM_BASKET,
-      id
-    })
+      id,
+    });
   };
 
   const removeAllItems = () => {
     dispatch({
       type: STORE_CONST.REMOVE_ALL_ITEMS_FROM_BASKET,
-      id
-    })
+      id,
+    });
   };
 
   return (
@@ -47,19 +55,28 @@ function CheckoutProduct({ id, image, title, price, rating, count }) {
           })}
         </div>
 
-        <div className="checkoutProduct__itemsActions">
-          <button
-            onClick={removeItem}
-            className="checkoutProduct__actionButton"
-          >
-            -
-          </button>
-          <small>{count}</small>
-          <button onClick={addItem} className="checkoutProduct__actionButton">
-            +
-          </button>
-        </div>
-        <button onClick={removeAllItems}>remove all items from the basket</button>
+        {action && (
+          <>
+            <div className="checkoutProduct__itemsActions">
+              <button
+                onClick={removeItem}
+                className="checkoutProduct__actionButton"
+              >
+                -
+              </button>
+              <small>{count}</small>
+              <button
+                onClick={addItem}
+                className="checkoutProduct__actionButton"
+              >
+                +
+              </button>
+            </div>
+            <button onClick={removeAllItems}>
+              remove all items from the basket
+            </button>
+          </>
+        )}
       </div>
     </section>
   );
