@@ -25,7 +25,7 @@ export const filteredBasket = (basket) => {
 };
 
 const reducer = (state, action) => {
-  console.log(action, '>>>>>  ACTION IN REDUCER');
+  console.log(action, ">>>>>  ACTION IN REDUCER");
   let newBasket = [];
   switch (action.type) {
     case STORE_CONST.SET_USER:
@@ -61,6 +61,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         basket: newBasket,
+      };
+    case STORE_CONST.EMPTY_BASKET:
+      return {
+        ...state,
+        basket: [],
       };
 
     default:
